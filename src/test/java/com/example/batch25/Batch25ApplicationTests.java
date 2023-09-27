@@ -23,11 +23,11 @@ class Batch25ApplicationTests {
 	public void insert(){
 		//ARRANGE
 		Region region = new Region();
-		region.setName("Waktu Indonesia Barat");
+		region.setName("Waktu Indonesia Timur");
 		Boolean expectedValue = true;
 		//ACT
 		regionRepository.save(region);
-		Boolean actualValue = regionRepository.findById(region.getRegion_id()).isPresent();
+		Boolean actualValue = regionRepository.findById(region.getId()).isPresent();
 
 		//ASSERT
 		assertEquals(expectedValue, actualValue);
@@ -36,30 +36,29 @@ class Batch25ApplicationTests {
 	public void update(){
 		Region region = new Region();
 		region.setName("Waktu Indonesia Timur");
-		region.setRegion_id(1);
+		region.setId(1);
 		Boolean expectedValue = true;
 
 		regionRepository.save(region);
-		// Boolean actualValue = regionRepository.findById(region.getRegion_id()).isPresent();
-		Boolean testValue;
-		if(regionRepository.CountByName("Waktu Indonesia Timur") > 0 && regionRepository.findById(region.getRegion_id()).isPresent()){
-			testValue = true;
+		Boolean actualValue;
+		if(regionRepository.CountByName("Waktu Indonesia Timur") > 0 && regionRepository.findById(region.getId()).isPresent()){
+			actualValue = true;
 		}else{
-			testValue = false;
+			actualValue = false;
 		}
 
-		assertEquals(expectedValue, testValue);
+		assertEquals(expectedValue, actualValue);
 		}
 
 	@Test
 	public void delete(){
 		Region region = new Region();
-		region.setRegion_id(1);
+		region.setId(3);
 
 		Boolean expectedValue = false;
 		regionRepository.delete(region);
 
-		Boolean actualValue = regionRepository.findById(region.getRegion_id()).isPresent();
+		Boolean actualValue = regionRepository.findById(region.getId()).isPresent();
 
 		assertEquals(expectedValue, actualValue);
 	}

@@ -16,18 +16,18 @@ public class Division {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "division_id")
-    private Integer division_id;
+    private Integer id;
     private String name;
 
     @OneToMany(mappedBy = "division")
     public List<Department> departments;
 
-    public Integer getDivision_id() {
-        return division_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDivision_id(Integer division_id) {
-        this.division_id = division_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,6 +45,8 @@ public class Division {
     public void setDepartments(List<Department> departments) {
         this.departments = departments;
     }
+
+    
 
     
 }
