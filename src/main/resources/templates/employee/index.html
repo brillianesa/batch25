@@ -1,6 +1,6 @@
 <html>
 <head>
-<title> Index of DIVISION</title>
+<title> Index of EMPLOYEE</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
@@ -10,7 +10,7 @@
         <div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">
         <table class="table">
             <a class="btn btn-warning"
-                    th:href="@{/division/form}"
+                    th:href="@{/employee/form}"
                     style="font-size: 50px;"
             
             >CREATE</a>
@@ -18,21 +18,27 @@
             
             <tr>
                 <th>ID</th>
-                <th>DIVISION NAME</th>
+                <th>FULL NAME</th>
+                <th>JOIN DATE</th>
+                <th>PHONE NUMBER</th>
+                <th>DEPARTMENT NAME</th>
             </tr>
             <tbody>
                 <tr
-                th:each="division : ${divisions}">
-                    <td th:text="${division.id}">ID</td>
-                    <td th:text="${division.name}">DIVISION NAME</td>
+                th:each="employee : ${employees}">
+                    <td th:text="${employee.id}">ID</td>
+                    <td th:text="${employee.fullname}">FULL NAME</td>
+                    <td th:text="${employee.joindate}">JOIN DATE</td>
+                    <td th:text="${employee.numberphone}">PHONE NUMBER</td>
+                    <td th:text="${employee.department.name}">DEPARTMENT NAME</td>
                     <td><a class="btn btn-warning"
-                        th:href="@{division/form/{id} (id = ${division.id})}"
+                        th:href="@{employee/form/{id} (id = ${employee.id})}"
                         >EDIT</a> | 
                         
                         
 
                         <form
-                        th:action="@{/division/delete/{id} (id=${division.id})}"
+                        th:action="@{/employee/delete/{id} (id=${employee.id})}"
                         method="POST">
                         <button class="btn btn-danger"
                      onclick="return confirm('Apakah anda yakin?')">

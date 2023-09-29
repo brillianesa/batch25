@@ -46,6 +46,7 @@ class Batch25ApplicationTests {
 		}else{
 			actualValue = false;
 		}
+		
 
 		assertEquals(expectedValue, actualValue);
 		}

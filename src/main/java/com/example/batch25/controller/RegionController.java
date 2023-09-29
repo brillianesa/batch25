@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.batch25.dto.RegisterRequest;
 import com.example.batch25.model.Region;
 import com.example.batch25.repository.RegionRepository;
 
@@ -56,6 +57,8 @@ public class RegionController {
         }
         return "redirect:/region";
     }
+
+    
 
 
 }
