@@ -1,6 +1,5 @@
 package com.example.batch25.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,53 +8,51 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.batch25.model.Region;
-import com.example.batch25.repository.RegionRepository;
+import com.example.batch25.model.Division;
+
+import com.example.batch25.repository.DivisionRepository;
 
 @Controller
-@RequestMapping("region")
-public class RegionController {
+@RequestMapping("division")
+public class DivisionController {
     @Autowired
-    RegionRepository regionRepository;
+    DivisionRepository divisionRepository;
 
     @GetMapping()
     public String index(Model model){
-        model.addAttribute("regions", regionRepository.findAll());
-        return "region/index";
+        model.addAttribute("divisions", divisionRepository.findAll());
+        return "division/index";
     }
 
     @GetMapping(value = {"form", "form/{id}"})
     public String form(Model model, @PathVariable(required = false) Integer id){
         if (id != null){
-            model.addAttribute("region", regionRepository.findById(id));
+            model.addAttribute("division", divisionRepository.findById(id));
         }else{
-            model.addAttribute("region", new Region());
+            model.addAttribute("division", new Division());
         }
-        return "region/form";
+        return "division/form";
     }
-    
 
     @PostMapping("save")
-    public String save(Region region){
-        regionRepository.save(region);
-        if(regionRepository.findById(region.getId()).isPresent()){
-            return "redirect:/region";
+    public String save(Division division){
+        divisionRepository.save(division);
+        if(divisionRepository.findById(division.getId()).isPresent()){
+            return "redirect:/division";
         }else{
-            return "region/form";
+            return "division/form";
         }
     }
 
     @PostMapping("delete/{id}")
     public String delete(@PathVariable(required = true) Integer id){
-        regionRepository.deleteById(id);
-        Boolean isDeleted = regionRepository.findById(id).isEmpty();
+        divisionRepository.deleteById(id);
+        Boolean isDeleted = divisionRepository.findById(id).isEmpty();
         if(isDeleted){
             System.out.println("Data deleted");
         }else{
             System.out.println("Failed to delete data");
         }
-        return "redirect:/region";
+        return "redirect:/division";
     }
-
-
 }
