@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.batch25.dto.RegisterRequest;
-import com.example.batch25.model.Division;
 import com.example.batch25.model.Employee;
 import com.example.batch25.model.User;
 import com.example.batch25.repository.DepartmentRepository;
-import com.example.batch25.repository.DivisionRepository;
 import com.example.batch25.repository.EmployeeRepository;
 import com.example.batch25.repository.RoleRepository;
 import com.example.batch25.repository.UserRepository;
@@ -49,8 +47,9 @@ public class EmployeeController {
         }else{
             model.addAttribute("departments", departmentRepository.findAll());
             model.addAttribute("roles", roleRepository.findAll());
-            model.addAttribute("employee", new Employee());
-            model.addAttribute("user", new User());
+            model.addAttribute("registerDTO", new RegisterRequest());
+            // model.addAttribute("employee", new Employee());
+            // model.addAttribute("user", new User());
         }
         return "employee/form";
     }
@@ -62,7 +61,6 @@ public class EmployeeController {
         emp.setJoindate(registerRequest.getJoindate());
         emp.setNumberphone(registerRequest.getNumberphone());
         emp.setDepartment(registerRequest.getDepartment());
-
         employeeRepository.save(emp);
         if(employeeRepository.findById(emp.getId()).isPresent()){
             User user = new User();
