@@ -32,10 +32,11 @@ public class AppSecurityConfig {
                         auth
                                 .antMatchers("/account/login/").permitAll()
                                 .antMatchers("account/register").permitAll()
+                                .antMatchers("account/authenticate").permitAll()
                                 .antMatchers("account/changepassword").authenticated()
                                 .antMatchers("/department/**").hasAuthority("Staff")
                                 .antMatchers("/region/**").hasAuthority("Manager")
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll() //ganti ke authenticated()
                                 .and()
                                 .formLogin()
                                 .loginPage("/account/login")

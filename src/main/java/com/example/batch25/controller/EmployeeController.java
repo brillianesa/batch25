@@ -1,6 +1,7 @@
 package com.example.batch25.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,9 @@ public class EmployeeController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping()
     public String index(Model model){
@@ -67,7 +71,7 @@ public class EmployeeController {
             Integer user_id = employeeRepository.findIdByPhoneNumber(registerRequest.getNumberphone());
             user.setId(user_id);
             user.setEmail(registerRequest.getEmail());
-            user.setPassword(registerRequest.getPassword());
+            user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
             user.setRole(registerRequest.getRole());
             userRepository.save(user);
             if(userRepository.findById(user.getId()).isPresent()){

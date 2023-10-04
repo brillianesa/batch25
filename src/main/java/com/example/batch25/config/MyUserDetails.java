@@ -33,7 +33,7 @@ public class MyUserDetails implements UserDetails, UserDetailsService{
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.loginNext(email);
+        return userRepository.loginNext(username);
     }
 
     @Override
