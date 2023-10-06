@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "tb_m_department")
@@ -31,6 +33,7 @@ public class Department {
     private Division division;
 
     @OneToMany(mappedBy = "department")
+    @JsonIgnore
     private List<Employee> employees;
 
     public Integer getId() {

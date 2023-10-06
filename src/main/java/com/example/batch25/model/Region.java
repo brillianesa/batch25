@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_m_region")
 public class Region {
@@ -20,6 +22,7 @@ public class Region {
     private String name;
 
     @OneToMany(mappedBy = "region")
+    @JsonIgnore
     public List<Department> departments;
 
     public Integer getId() {

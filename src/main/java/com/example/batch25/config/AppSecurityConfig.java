@@ -30,10 +30,10 @@ public class AppSecurityConfig {
                 .authorizeHttpRequests((auth) -> {
                     try {
                         auth
-                                .antMatchers("/account/login/").permitAll()
-                                .antMatchers("account/register").permitAll()
-                                .antMatchers("account/authenticate").permitAll()
-                                .antMatchers("account/changepassword").authenticated()
+                                .antMatchers("/account/login").permitAll()
+                                .antMatchers("/employee/form").permitAll()
+                                .antMatchers("/account/authenticate").permitAll()
+                                .antMatchers("/account/changepassword").authenticated()
                                 .antMatchers("/department/**").hasAuthority("Staff")
                                 .antMatchers("/region/**").hasAuthority("Manager")
                                 .anyRequest().permitAll() //ganti ke authenticated()
