@@ -37,7 +37,10 @@ public class RegionRestController {
             newRegion.setId(id);
             newRegion.setName(region.getName());
             regionRepository.save(newRegion);
-            return regionRepository.CountByName(newRegion.getName()) > 0 && regionRepository.findById(newRegion.getId()).isPresent();
+            Boolean isUpdated = regionRepository.CountByName(newRegion.getName()) > 0 && regionRepository.findById(newRegion.getId()).isPresent();
+            if(isUpdated){
+                return CustomResponse.generate(HttpStatus.OK, "Data saved");
+            }
         }else{
             regionRepository.save(region);
             Boolean isCreated = regionRepository.findById(region.getId()).isPresent();
