@@ -34,7 +34,7 @@ public class RegionRestController {
             newRegion.setId(id);
             newRegion.setName(region.getName());
             regionRepository.save(newRegion);
-            return regionRepository.CountByName(region.getName()) > 0 && regionRepository.findById(region.getId()).isPresent();
+            return regionRepository.CountByName(newRegion.getName()) > 0 && regionRepository.findById(newRegion.getId()).isPresent();
         }else{
             regionRepository.save(region);
             return regionRepository.findById(region.getId()).isPresent();
