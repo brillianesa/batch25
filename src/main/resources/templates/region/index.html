@@ -1,73 +1,107 @@
 <html>
-<head>
+    <!-- INSERT SCRIPT -->
+<head th:insert="layout/header.html :: head_html">
 <title> Index of REGION</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 </head>
-<body class=".bg-warning.bg-gradient">
-    
-    <div class="container" >
-        <div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">
-        <table id="myTable" class="table">
-            <a
-            type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="reloadForm(  )"
-                    style="margin-bottom: 10px; font-size: 50px;"
-            >CREATE</a>
+<body class="fix-header fix-sidebar card-no-border">
+    <!-- LOADER -->
+    <div th:replace="layout/header.html :: loader">
 
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>REGION NAME</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-
-        </div>
     </div>
-
-  
-  <!-- Modal CREATE-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Create Region</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div id="main-wrapper">
+        <!-- HEADER -->
+        <div th:replace="layout/header.html :: header">
         </div>
-        <div class="modal-body">
-            <form 
-            class = "container"
-            >
-            <div class="form-group" hidden>
-                <label for="Id" class="col-form-label">ID</label>
-                <input type="text" class="form-control" id="id">
+        
+        <div class="page-wrapper">
+
+            <!-- FORM -->
+            <div class="container-fluid"> 
+                <div class="container" >
+                    <div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">
+                    <table id="myTable" class="table">
+                        <a
+                        type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="reloadForm(  )"
+                                style="margin-bottom: 10px; font-size: 50px;"
+                        >CREATE</a>
+            
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>ID</th>
+                                <th>REGION NAME</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+            
+                    </div>
+                </div>
+            
+              
+              <!-- Modal CREATE-->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Create Region</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form 
+                        class = "container"
+                        >
+                        <div class="form-group" hidden>
+                            <label for="Id" class="col-form-label">ID</label>
+                            <input type="text" class="form-control" id="id">
+                        </div>
+                        <div class="form-group col-md-3" >
+                            <label for="Name" class="col-form-label">NAME</label>
+                            <input type="text" class="form-control" id="name">
+                        </div>   
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="reloadForm()">Close</button>
+                      <button id="submit" type="button" class="btn btn-primary" onclick="submit()">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="form-group col-md-3" >
-                <label for="Name" class="col-form-label">NAME</label>
-                <input type="text" class="form-control" id="name">
-            </div>   
-            </form>
+            
+            
+            <!-- FOOTER-->
+            <div th:replace="layout/footer.html :: footer">
+
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="reloadForm()">Close</button>
-          <button id="submit" type="button" class="btn btn-primary" onclick="submit()">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
-
-
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> 
+    <script src="/assets/admin/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="/assets/admin/js/jquery.slimscroll.js"></script>
+    <script src="/assets/admin/js/waves.js"></script>
+    <script src="/assets/admin/js/sidebarmenu.js"></script>
+    <script src="/assets/admin/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="/assets/admin/js/custom.min.js"></script>
+    <script src="/assets/admin/plugins/chartist-js/dist/chartist.min.js"></script>
+    <script src="/assets/admin/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="/assets/admin/plugins/echarts/echarts-all.js"></script>
+    <script src="/assets/admin/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/assets/admin/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/assets/admin/plugins/moment/moment.js"></script>
+    <script src='/assets/admin/plugins/calendar/dist/fullcalendar.min.js'></script>
+    <script src="/assets/admin/plugins/calendar/dist/jquery.fullcalendar.js"></script>
+    <script src="/assets/admin/plugins/calendar/dist/cal-init.js"></script>
+    <script src="/assets/admin/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="/assets/admin/js/dashboard4.js"></script>
+    <script src="/assets/admin/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let baseUrl = "http://localhost:8088/api/"
         let table = null;
@@ -204,6 +238,13 @@
 
         
     </script>
+</body>
+
+<!-- <body class=".bg-warning.bg-gradient">
+
+
+</body> -->
+    
     
 
 
