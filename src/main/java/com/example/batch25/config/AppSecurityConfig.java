@@ -64,7 +64,7 @@ public class AppSecurityConfig{
                                 .antMatchers("/account/authenticate").permitAll()
                                 .antMatchers("/authenticate").permitAll()
                                 .antMatchers("/account/changepassword").authenticated()
-                                .antMatchers("/department/**").hasAuthority("Staff")
+                                .antMatchers("/department/**").permitAll()
                                 .antMatchers("/region/**").permitAll()
                                 .anyRequest().permitAll() //ganti ke authenticated()
                                 .and()

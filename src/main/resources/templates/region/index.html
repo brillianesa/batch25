@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
     <!-- INSERT SCRIPT -->
 <head th:insert="layout/header.html :: head_html">
@@ -8,10 +10,12 @@
     <div th:replace="layout/header.html :: loader">
 
     </div>
+
     <div id="main-wrapper">
         <!-- HEADER -->
-        <div th:replace="layout/header.html :: header">
-        </div>
+        <div th:replace="layout/header.html :: header"></div>
+        <!-- SIDEBAR -->
+        <div th:replace="layout/sidebar.html :: sidebar"></div>
         
         <div class="page-wrapper">
 

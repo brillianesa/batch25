@@ -13,42 +13,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.batch25.handler.CustomResponse;
 import com.example.batch25.model.Department;
-import com.example.batch25.repository.DepartmentRepository;
+import com.example.batch25.model.Division;
+import com.example.batch25.repository.DivisionRepository;
 
 @RestController
 @RequestMapping("api")
-public class DepartmentRestController {
+public class DivisionRestController {
     @Autowired
-    private DepartmentRepository departmentRepository;
+    DivisionRepository divisionRepository;
 
-    @GetMapping("department")
+    @GetMapping("division")
     public ResponseEntity<Object> Get(){
-        return CustomResponse.generate(HttpStatus.OK, "Data retrieved", departmentRepository.findAll());
+        return CustomResponse.generate(HttpStatus.OK, "Data retrieved", divisionRepository.findAll());
     }
 
-    @PostMapping(value = {"department", "department/{id}"})
-    public ResponseEntity<Object> save(@RequestBody Department department, @PathVariable(required = false) Integer id){
+    @PostMapping(value = {"division", "division/{id}"})
+    public ResponseEntity<Object> save(@RequestBody Division division, @PathVariable(required = false) Integer id){
         if (id != null){
-            Department newDepartment  = departmentRepository.findById(id).orElse(null);
-            newDepartment.setId(id);
-            newDepartment.setName(department.getName());
-            newDepartment.setRegion(department.getRegion());
-            newDepartment.setDivision(department.getDivision());
-            departmentRepository.save(newDepartment);
+            Division newDivision  = divisionRepository.findById(id).orElse(null);
+            newDivision.setId(division.getId());
+            newDivision.setName(division.getName());
+            newDivision.setDepartments(division.getDepartments());
+            divisionRepository.save(newDivision);
             return CustomResponse.generate(HttpStatus.OK, "Data saved");
         }else{
-            departmentRepository.save(department);
-            Boolean isCreated = departmentRepository.findById(department.getId()).isPresent();
+            divisionRepository.save(division);
+            Boolean isCreated = divisionRepository.findById(division.getId()).isPresent();
             if(isCreated){
                 return CustomResponse.generate(HttpStatus.OK, "Data saved");
             } 
         }return CustomResponse.generate(HttpStatus.OK, "Data failed to save");
     }
 
-    @DeleteMapping("department/{id}")
+    @DeleteMapping("division/{id}")
     public ResponseEntity<Object> delete(@PathVariable(required = true) Integer id){
-        departmentRepository.deleteById(id);
-        Boolean isDeleted = departmentRepository.findById(id).isEmpty();
+        divisionRepository.deleteById(id);
+        Boolean isDeleted = divisionRepository.findById(id).isEmpty();
         if(isDeleted){
             return CustomResponse.generate(HttpStatus.OK, "Data deleted");
         }else{
@@ -57,12 +57,12 @@ public class DepartmentRestController {
         
     }
 
-    @GetMapping("department/{id}")
+    @GetMapping("division/{id}")
     public ResponseEntity<Object> Get(@PathVariable(required = true) Integer id){
-        departmentRepository.findById(id);
-        Boolean isExist = departmentRepository.findById(id).isPresent();
+        divisionRepository.findById(id);
+        Boolean isExist = divisionRepository.findById(id).isPresent();
         if(isExist){
-            return CustomResponse.generate(HttpStatus.OK, "Data retrieved", departmentRepository.findById(id));
+            return CustomResponse.generate(HttpStatus.OK, "Data retrieved", divisionRepository.findById(id));
         }else{
             return CustomResponse.generate(HttpStatus.BAD_REQUEST, "Data failed to retrieve");
         }
